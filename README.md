@@ -1,6 +1,6 @@
 # kt-guard-clause
 
-[![CI](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/ci.yml)
+[![CI](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/guard-clause)](https://central.sonatype.com/artifact/com.philiprehberger/guard-clause)
 
 Fluent guard clause validation for Kotlin with descriptive error messages.
