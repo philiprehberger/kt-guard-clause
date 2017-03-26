@@ -13,4 +13,4 @@ package com.philiprehberger.guardclause
  * @param name the parameter name for error messages
  * @return a [GuardClause] for fluent validation
  */
-fun <T> guard(value: T, name: String): GuardClause<T> = GuardClause(value, name)
+public fun <T> guard(value: T, name: String): GuardClause<T> = GuardClause(value, name)

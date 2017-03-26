@@ -9,8 +9,8 @@ package com.philiprehberger.guardclause
  * @property condition a description of the violated condition
  * @property actualValue the actual value that failed validation
  */
-class GuardException(
-    val parameterName: String,
-    val condition: String,
-    val actualValue: Any?,
+public class GuardException(
+    public val parameterName: String,
+    public val condition: String,
+    public val actualValue: Any?,
 ) : IllegalArgumentException("$parameterName: $condition (was: $actualValue)")
