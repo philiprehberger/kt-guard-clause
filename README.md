@@ -1,13 +1,10 @@
-# kt-guard-clause
+# guard-clause
 
 [![CI](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/guard-clause)](https://central.sonatype.com/artifact/com.philiprehberger/guard-clause)
+[![License](https://img.shields.io/github/license/philiprehberger/kt-guard-clause)](LICENSE)
 
 Fluent guard clause validation for Kotlin with descriptive error messages.
-
-## Requirements
-
-- Kotlin 1.9+ / Java 17+
 
 ## Installation
 
@@ -15,7 +12,7 @@ Fluent guard clause validation for Kotlin with descriptive error messages.
 
 ```kotlin
 dependencies {
-    implementation("com.philiprehberger:guard-clause:0.1.0")
+    implementation("com.philiprehberger:guard-clause:0.1.3")
 }
 ```
 
@@ -33,7 +30,7 @@ dependencies {
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>guard-clause</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.3</version>
 </dependency>
 ```
 
