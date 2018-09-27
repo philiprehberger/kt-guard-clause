@@ -12,7 +12,7 @@ Fluent guard clause validation for Kotlin with descriptive error messages.
 
 ```kotlin
 dependencies {
-    implementation("com.philiprehberger:guard-clause:0.1.3")
+    implementation("com.philiprehberger:guard-clause:0.1.4")
 }
 ```
 
@@ -22,7 +22,7 @@ dependencies {
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>guard-clause</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
 </dependency>
 ```
 
