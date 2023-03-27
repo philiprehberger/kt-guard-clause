@@ -184,4 +184,122 @@ class GuardClauseTest {
         }
         assertTrue(errors.isEmpty())
     }
+
+    @Test
+    fun `isEmail passes for valid email`() {
+        guard("user@example.com", "email").isEmail()
+    }
+
+    @Test
+    fun `isEmail fails for invalid email`() {
+        assertFailsWith<GuardException> {
+            guard("not-an-email", "email").isEmail()
+        }
+    }
+
+    @Test
+    fun `isEmail fails for email without domain`() {
+        assertFailsWith<GuardException> {
+            guard("user@", "email").isEmail()
+        }
+    }
+
+    @Test
+    fun `isUrl passes for valid http URL`() {
+        guard("http://example.com", "url").isUrl()
+    }
+
+    @Test
+    fun `isUrl passes for valid https URL with path`() {
+        guard("https://example.com/path/to/resource", "url").isUrl()
+    }
+
+    @Test
+    fun `isUrl passes for URL with port`() {
+        guard("http://localhost:8080/api", "url").isUrl()
+    }
+
+    @Test
+    fun `isUrl fails for invalid URL`() {
+        assertFailsWith<GuardException> {
+            guard("not-a-url", "url").isUrl()
+        }
+    }
+
+    @Test
+    fun `startsWith passes when string starts with prefix`() {
+        guard("hello world", "greeting").startsWith("hello")
+    }
+
+    @Test
+    fun `startsWith fails when string does not start with prefix`() {
+        val ex = assertFailsWith<GuardException> {
+            guard("world hello", "greeting").startsWith("hello")
+        }
+        assertTrue(ex.message!!.contains("must start with"))
+    }
+
+    @Test
+    fun `endsWith passes when string ends with suffix`() {
+        guard("hello world", "greeting").endsWith("world")
+    }
+
+    @Test
+    fun `endsWith fails when string does not end with suffix`() {
+        assertFailsWith<GuardException> {
+            guard("hello world", "greeting").endsWith("hello")
+        }
+    }
+
+    @Test
+    fun `contains passes when string contains substring`() {
+        guard("hello world", "greeting").contains("lo wo")
+    }
+
+    @Test
+    fun `contains fails when string does not contain substring`() {
+        assertFailsWith<GuardException> {
+            guard("hello world", "greeting").contains("xyz")
+        }
+    }
+
+    @Test
+    fun `isIn passes when value is in collection`() {
+        guard("admin", "role").isIn(listOf("admin", "user", "moderator"))
+    }
+
+    @Test
+    fun `isIn fails when value is not in collection`() {
+        assertFailsWith<GuardException> {
+            guard("superadmin", "role").isIn(listOf("admin", "user", "moderator"))
+        }
+    }
+
+    @Test
+    fun `isIn works with numbers`() {
+        guard(5, "priority").isIn(listOf(1, 2, 3, 5, 8))
+    }
+
+    @Test
+    fun `satisfies passes when predicate is true`() {
+        guard("ABC123", "code").satisfies("must be alphanumeric") { it.all { c -> c.isLetterOrDigit() } }
+    }
+
+    @Test
+    fun `satisfies fails with custom validation name`() {
+        val ex = assertFailsWith<GuardException> {
+            guard("abc 123", "code").satisfies("must be alphanumeric") { it.all { c -> c.isLetterOrDigit() } }
+        }
+        assertTrue(ex.message!!.contains("must be alphanumeric"))
+    }
+
+    @Test
+    fun `new guards chain with existing guards`() {
+        guard("user@example.com", "email")
+            .notBlank()
+            .isEmail()
+            .minLength(5)
+            .maxLength(100)
+            .contains("@")
+    }
 }

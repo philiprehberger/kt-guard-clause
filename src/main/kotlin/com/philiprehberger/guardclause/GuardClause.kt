@@ -202,4 +202,119 @@ public class GuardClause<T>(
         }
         return this
     }
+
+    /**
+     * Asserts that the string value is a valid email address.
+     *
+     * Uses a standard email pattern: local@domain with at least one dot in the domain.
+     *
+     * @return this guard clause for chaining
+     * @throws GuardException if the value is not a valid email
+     */
+    public fun isEmail(): GuardClause<T> {
+        val str = value as? String
+            ?: throw GuardException(name, "must be a String for isEmail", value)
+        val emailPattern = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+        if (!emailPattern.matches(str)) {
+            throw GuardException(name, "must be a valid email address", value)
+        }
+        return this
+    }
+
+    /**
+     * Asserts that the string value is a valid URL.
+     *
+     * Accepts http and https URLs with a domain.
+     *
+     * @return this guard clause for chaining
+     * @throws GuardException if the value is not a valid URL
+     */
+    public fun isUrl(): GuardClause<T> {
+        val str = value as? String
+            ?: throw GuardException(name, "must be a String for isUrl", value)
+        val urlPattern = Regex("^https?://[A-Za-z0-9.-]+(:[0-9]+)?(/.*)?$")
+        if (!urlPattern.matches(str)) {
+            throw GuardException(name, "must be a valid URL", value)
+        }
+        return this
+    }
+
+    /**
+     * Asserts that the string value starts with the given [prefix].
+     *
+     * @param prefix the required prefix
+     * @return this guard clause for chaining
+     * @throws GuardException if the value does not start with the prefix
+     */
+    public fun startsWith(prefix: String): GuardClause<T> {
+        val str = value as? String
+            ?: throw GuardException(name, "must be a String for startsWith", value)
+        if (!str.startsWith(prefix)) {
+            throw GuardException(name, "must start with \"$prefix\"", value)
+        }
+        return this
+    }
+
+    /**
+     * Asserts that the string value ends with the given [suffix].
+     *
+     * @param suffix the required suffix
+     * @return this guard clause for chaining
+     * @throws GuardException if the value does not end with the suffix
+     */
+    public fun endsWith(suffix: String): GuardClause<T> {
+        val str = value as? String
+            ?: throw GuardException(name, "must be a String for endsWith", value)
+        if (!str.endsWith(suffix)) {
+            throw GuardException(name, "must end with \"$suffix\"", value)
+        }
+        return this
+    }
+
+    /**
+     * Asserts that the string value contains the given [substring].
+     *
+     * @param substring the required substring
+     * @return this guard clause for chaining
+     * @throws GuardException if the value does not contain the substring
+     */
+    public fun contains(substring: String): GuardClause<T> {
+        val str = value as? String
+            ?: throw GuardException(name, "must be a String for contains", value)
+        if (substring !in str) {
+            throw GuardException(name, "must contain \"$substring\"", value)
+        }
+        return this
+    }
+
+    /**
+     * Asserts that the value is a member of the given [collection].
+     *
+     * @param collection the allowed values
+     * @return this guard clause for chaining
+     * @throws GuardException if the value is not in the collection
+     */
+    public fun isIn(collection: Collection<T>): GuardClause<T> {
+        if (value !in collection) {
+            throw GuardException(name, "must be one of $collection", value)
+        }
+        return this
+    }
+
+    /**
+     * Asserts that the value satisfies a named custom [predicate].
+     *
+     * Unlike [must], this provides a more descriptive validation name for error messages.
+     *
+     * @param validationName the name of the validation for error messages
+     * @param predicate the custom validation predicate
+     * @return this guard clause for chaining
+     * @throws GuardException if the predicate returns false
+     */
+    public fun satisfies(validationName: String, predicate: (T) -> Boolean): GuardClause<T> {
+        if (!predicate(value)) {
+            throw GuardException(name, validationName, value)
+        }
+        return this
+    }
 }

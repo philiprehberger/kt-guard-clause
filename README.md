@@ -11,7 +11,7 @@ Fluent guard clause validation for Kotlin with descriptive error messages.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("com.philiprehberger:guard-clause:0.1.5")
+implementation("com.philiprehberger:guard-clause:0.2.0")
 ```
 
 ### Maven
@@ -20,7 +20,7 @@ implementation("com.philiprehberger:guard-clause:0.1.5")
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>guard-clause</artifactId>
-    <version>0.1.5</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -60,6 +60,33 @@ if (errors.isNotEmpty()) {
 }
 ```
 
+### Email and URL Validation
+
+```kotlin
+guard(email, "email").notBlank().isEmail()
+guard(website, "website").notBlank().isUrl()
+```
+
+### String Content Guards
+
+```kotlin
+guard(filename, "filename")
+    .startsWith("report_")
+    .endsWith(".csv")
+    .contains("2026")
+
+guard(role, "role").isIn(listOf("admin", "user", "moderator"))
+```
+
+### Named Custom Validations
+
+```kotlin
+guard(password, "password")
+    .minLength(8)
+    .satisfies("must contain a digit") { it.any { c -> c.isDigit() } }
+    .satisfies("must contain uppercase") { it.any { c -> c.isUpperCase() } }
+```
+
 ## API
 
 | Function / Class | Description |
@@ -77,6 +104,13 @@ if (errors.isNotEmpty()) {
 | `GuardClause.minSize(n)` | Assert minimum collection size |
 | `GuardClause.maxSize(n)` | Assert maximum collection size |
 | `GuardClause.must { }` | Custom predicate validation |
+| `GuardClause.isEmail()` | Assert string is a valid email |
+| `GuardClause.isUrl()` | Assert string is a valid URL |
+| `GuardClause.startsWith(prefix)` | Assert string starts with prefix |
+| `GuardClause.endsWith(suffix)` | Assert string ends with suffix |
+| `GuardClause.contains(substring)` | Assert string contains substring |
+| `GuardClause.isIn(collection)` | Assert value is in collection |
+| `GuardClause.satisfies(name) { }` | Named custom predicate validation |
 | `guardAll { }` | Collect all errors instead of fail-fast |
 | `GuardException` | Thrown on validation failure |
 
