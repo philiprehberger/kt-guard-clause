@@ -1,0 +1,17 @@
+# Changelog
+
+All notable changes to this library will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.1.0] - 2026-03-17
+
+### Added
+- `guard(value, name)` entry point for fluent validation
+- `GuardClause` with `notNull`, `notBlank`, `minLength`, `maxLength`, `matches`, `positive`, `negative`, `inRange`, `notEmpty`, `minSize`, `maxSize`, `must` validators
+- `GuardException` with formatted error messages: "$name: $condition (was: $value)"
+- `guardAll { }` for collecting all validation errors instead of fail-fast
+- `GuardError` data class for collected errors
