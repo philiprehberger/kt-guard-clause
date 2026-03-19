@@ -12,9 +12,9 @@ package com.philiprehberger.guardclause
  * @property value the value to validate
  * @property name the parameter name for error messages
  */
-class GuardClause<T>(
-    val value: T,
-    val name: String,
+public class GuardClause<T>(
+    public val value: T,
+    public val name: String,
 ) {
 
     /**
@@ -23,7 +23,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the value is null
      */
-    fun notNull(): GuardClause<T> {
+    public fun notNull(): GuardClause<T> {
         if (value == null) {
             throw GuardException(name, "must not be null", value)
         }
@@ -36,7 +36,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the value is blank
      */
-    fun notBlank(): GuardClause<T> {
+    public fun notBlank(): GuardClause<T> {
         val str = value as? String
             ?: throw GuardException(name, "must be a String for notBlank", value)
         if (str.isBlank()) {
@@ -52,7 +52,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the string is shorter than [min]
      */
-    fun minLength(min: Int): GuardClause<T> {
+    public fun minLength(min: Int): GuardClause<T> {
         val str = value as? String
             ?: throw GuardException(name, "must be a String for minLength", value)
         if (str.length < min) {
@@ -68,7 +68,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the string is longer than [max]
      */
-    fun maxLength(max: Int): GuardClause<T> {
+    public fun maxLength(max: Int): GuardClause<T> {
         val str = value as? String
             ?: throw GuardException(name, "must be a String for maxLength", value)
         if (str.length > max) {
@@ -84,7 +84,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the string does not match
      */
-    fun matches(regex: Regex): GuardClause<T> {
+    public fun matches(regex: Regex): GuardClause<T> {
         val str = value as? String
             ?: throw GuardException(name, "must be a String for matches", value)
         if (!regex.matches(str)) {
@@ -99,7 +99,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the value is not positive
      */
-    fun positive(): GuardClause<T> {
+    public fun positive(): GuardClause<T> {
         val num = value as? Number
             ?: throw GuardException(name, "must be a Number for positive", value)
         if (num.toDouble() <= 0) {
@@ -114,7 +114,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the value is not negative
      */
-    fun negative(): GuardClause<T> {
+    public fun negative(): GuardClause<T> {
         val num = value as? Number
             ?: throw GuardException(name, "must be a Number for negative", value)
         if (num.toDouble() >= 0) {
@@ -131,7 +131,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the value is outside the range
      */
-    fun inRange(min: Double, max: Double): GuardClause<T> {
+    public fun inRange(min: Double, max: Double): GuardClause<T> {
         val num = value as? Number
             ?: throw GuardException(name, "must be a Number for inRange", value)
         val d = num.toDouble()
@@ -147,7 +147,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the collection is empty
      */
-    fun notEmpty(): GuardClause<T> {
+    public fun notEmpty(): GuardClause<T> {
         val col = value as? Collection<*>
             ?: throw GuardException(name, "must be a Collection for notEmpty", value)
         if (col.isEmpty()) {
@@ -163,7 +163,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the collection has fewer than [min] elements
      */
-    fun minSize(min: Int): GuardClause<T> {
+    public fun minSize(min: Int): GuardClause<T> {
         val col = value as? Collection<*>
             ?: throw GuardException(name, "must be a Collection for minSize", value)
         if (col.size < min) {
@@ -179,7 +179,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the collection has more than [max] elements
      */
-    fun maxSize(max: Int): GuardClause<T> {
+    public fun maxSize(max: Int): GuardClause<T> {
         val col = value as? Collection<*>
             ?: throw GuardException(name, "must be a Collection for maxSize", value)
         if (col.size > max) {
@@ -196,7 +196,7 @@ class GuardClause<T>(
      * @return this guard clause for chaining
      * @throws GuardException if the predicate returns false
      */
-    fun must(message: String = "must satisfy custom condition", predicate: (T) -> Boolean): GuardClause<T> {
+    public fun must(message: String = "must satisfy custom condition", predicate: (T) -> Boolean): GuardClause<T> {
         if (!predicate(value)) {
             throw GuardException(name, message, value)
         }

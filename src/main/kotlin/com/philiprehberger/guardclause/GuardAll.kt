@@ -7,10 +7,10 @@ package com.philiprehberger.guardclause
  * @property condition the violated condition description
  * @property actualValue the actual value that failed validation
  */
-data class GuardError(
-    val parameterName: String,
-    val condition: String,
-    val actualValue: Any?,
+public data class GuardError(
+    public val parameterName: String,
+    public val condition: String,
+    public val actualValue: Any?,
 )
 
 /**
@@ -19,7 +19,7 @@ data class GuardError(
  * Unlike direct [guard] calls which throw on the first failure,
  * [GuardAllScope] collects all errors so they can be returned together.
  */
-class GuardAllScope {
+public class GuardAllScope {
     private val errors = mutableListOf<GuardError>()
 
     /**
@@ -31,7 +31,7 @@ class GuardAllScope {
      * @param name the parameter name for error messages
      * @param block the validation logic using [GuardClause]
      */
-    fun <T> check(value: T, name: String, block: GuardClause<T>.() -> Unit) {
+    public fun <T> check(value: T, name: String, block: GuardClause<T>.() -> Unit): Unit {
         try {
             GuardClause(value, name).block()
         } catch (e: GuardException) {
@@ -58,7 +58,7 @@ class GuardAllScope {
  * @param block the validation block
  * @return a list of all [GuardError]s encountered
  */
-fun guardAll(block: GuardAllScope.() -> Unit): List<GuardError> {
+public fun guardAll(block: GuardAllScope.() -> Unit): List<GuardError> {
     val scope = GuardAllScope()
     scope.block()
     return scope.toErrors()
