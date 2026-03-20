@@ -16,14 +16,6 @@ dependencies {
 }
 ```
 
-### Gradle (Groovy)
-
-```groovy
-dependencies {
-    implementation 'com.philiprehberger:guard-clause:0.1.0'
-}
-```
-
 ### Maven
 
 ```xml
