@@ -3,6 +3,7 @@
 [![Tests](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-guard-clause/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/guard-clause)](https://central.sonatype.com/artifact/com.philiprehberger/guard-clause)
 [![License](https://img.shields.io/github/license/philiprehberger/kt-guard-clause)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
 
 Fluent guard clause validation for Kotlin with descriptive error messages.
 
