@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2026-03-31)
+
+- Add `isEmail()` guard for email address validation
+- Add `isUrl()` guard for URL validation
+- Add `startsWith()` and `endsWith()` guards for string prefix/suffix checks
+- Add `contains()` guard for string containment checks
+- Add `isIn()` guard for collection membership checks
+- Add `satisfies()` for named custom predicate validations
+
 ## 0.1.6 (2026-03-31)
 
 - Standardize README to 3-badge format with emoji Support section
